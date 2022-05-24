@@ -1,15 +1,15 @@
-BINARY_NAME=sokudoApp
+BINARY_NAME=celeritasApp
 
 build:
 	@go mod vendor
-	@echo "Building Sokudo..."
+	@echo "Building Celeritas..."
 	@go build -o tmp/${BINARY_NAME} .
-	@echo "Sokudo built!"
+	@echo "Celeritas built!"
 
 run: build
-	@echo "Starting Sokudo..."
+	@echo "Starting Celeritas..."
 	@./tmp/${BINARY_NAME} &
-	@echo "Sokudo started!"
+	@echo "Celeritas started!"
 
 clean:
 	@echo "Cleaning..."
@@ -22,17 +22,11 @@ test:
 	@go test ./...
 	@echo "Done!"
 
-start_compose:
-	sudo docker-compose up -d
-
-stop_compose:
-	sudo docker-compose down
-
 start: run
 
 stop:
-	@echo "Stopping Sokudo..."
+	@echo "Stopping Celeritas..."
 	@-pkill -SIGTERM -f "./tmp/${BINARY_NAME}"
-	@echo "Stopped Sokudo!"
+	@echo "Stopped Celeritas!"
 
 restart: stop start
