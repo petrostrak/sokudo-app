@@ -39,28 +39,22 @@ func (h *Handlers) randomString(n int) string {
 	return h.App.RandomString(n)
 }
 
-func (h *Handlers) printError(msg string, err error) {
-	h.App.ErrorLog.Println(msg, err)
-}
-
 func (h *Handlers) encrypt(text string) (string, error) {
 	enc := sokudo.Encryption{Key: []byte(h.App.EncryptionKey)}
 
-	encypted, err := enc.Encrypt(text)
+	encrypted, err := enc.Encrypt(text)
 	if err != nil {
 		return "", err
 	}
-
-	return encypted, nil
+	return encrypted, nil
 }
 
 func (h *Handlers) decrypt(crypto string) (string, error) {
 	enc := sokudo.Encryption{Key: []byte(h.App.EncryptionKey)}
 
-	decypted, err := enc.Decrypt(crypto)
+	decrypted, err := enc.Decrypt(crypto)
 	if err != nil {
 		return "", err
 	}
-
-	return decypted, nil
+	return decrypted, nil
 }

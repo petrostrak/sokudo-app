@@ -2,21 +2,21 @@ package handlers
 
 import (
 	"net/http"
-	"time"
 
 	"github.com/petrostrak/sokudo"
 	"github.com/petrostrak/sokudo-helper/data"
 )
 
+// Handlers is the type for handlers, and gives access to Celeritas and models
 type Handlers struct {
 	App    *sokudo.Sokudo
 	Models data.Models
 }
 
+// Home is the handler to render the home page
 func (h *Handlers) Home(w http.ResponseWriter, r *http.Request) {
-	defer h.App.LoadTime(time.Now())
-	if err := h.render(w, r, "home", nil, nil); err != nil {
-		h.printError("error rendering:", err)
+	err := h.render(w, r, "home", nil, nil)
+	if err != nil {
+		h.App.ErrorLog.Println("error rendering:", err)
 	}
-
 }
